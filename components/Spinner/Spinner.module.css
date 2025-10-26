@@ -1,0 +1,36 @@
+.loader {
+    border: 5px solid #306aa0;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.small {
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+}
+
+.medium {
+    width: 32px;
+    height: 32px;
+    border-width: 4px;
+}
+
+.large {
+    width: 48px;
+    height: 48px;
+    border-width: 5px;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
