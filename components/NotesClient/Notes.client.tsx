@@ -17,7 +17,11 @@ import { useDebouncedCallback } from 'use-debounce';
 import { useQuery } from '@tanstack/react-query';
 import css from './Notes.module.css';
 
-const NotesClient = () => {
+interface NotesClientProps {
+  filter?: string;
+}
+
+const NotesClient = ({ filter }: NotesClientProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -34,9 +38,17 @@ const NotesClient = () => {
     500
   );
 
+  const queryKey = [
+    QUERY_KEYS.NOTES,
+    searchQuery,
+    currentPage,
+    ...(filter ? [filter] : []),
+  ];
+
   const { data, isError, isFetching, error, isSuccess } = useQuery({
-    queryKey: [QUERY_KEYS.NOTES, searchQuery, currentPage],
-    queryFn: () => fetchNotes({ page: currentPage, search: searchQuery }),
+    queryKey,
+    queryFn: () =>
+      fetchNotes({ page: currentPage, search: searchQuery, tag: filter }),
     placeholderData: keepPreviousData,
     retry: 1,
     refetchOnMount: false,
@@ -45,13 +57,7 @@ const NotesClient = () => {
   const { notes, totalPages = 0 } = data || {};
 
   useEffect(() => {
-    if (!notes?.length && isSuccess) {
-      toast.error('No notes found for your request');
-    }
-  }, [notes?.length, isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
+    if (error) {
       toast.error(
         error?.message ? error.message : 'There was an error fetching notes'
       );

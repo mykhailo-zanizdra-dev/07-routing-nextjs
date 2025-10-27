@@ -6,6 +6,7 @@ interface FetchNotesParams {
   page?: number;
   perPage?: number;
   search?: string;
+  tag?: string;
 }
 
 export interface FetchNotesResponse {
@@ -17,12 +18,14 @@ export async function fetchNotes({
   page = 1,
   perPage = 12,
   search = '',
+  tag,
 }: FetchNotesParams = {}) {
   const response = await notehubApi.get<FetchNotesResponse>(endpoints.notes(), {
     params: {
       page,
       perPage,
       search,
+      ...(!!tag && { tag }),
     },
   });
   return response.data;
