@@ -1,11 +1,11 @@
 import QUERY_KEYS from '@/const/queryKeys';
-import NotesClient from '../../components/NotesClient/Notes.client';
 import { fetchNotes } from '@/lib/api';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import NotesClient from './filter/[...slug]/Notes.client';
 
 const Notes = async () => {
   const queryClient = new QueryClient();

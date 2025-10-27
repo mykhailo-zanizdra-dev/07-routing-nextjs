@@ -3,11 +3,11 @@ import QUERY_KEYS from '@/const/queryKeys';
 import { fetchNoteById } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
-import Modal from '../Modal/Modal';
-import css from './NotePreview.module.css';
 import toast from 'react-hot-toast';
+import Modal from '../../../../components/Modal/Modal';
+import css from './NotePreview.module.css';
 
-function NotePreview() {
+function NotePreviewClient() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
@@ -50,4 +50,4 @@ function NotePreview() {
   );
 }
 
-export default NotePreview;
+export default NotePreviewClient;

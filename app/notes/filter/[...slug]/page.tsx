@@ -2,7 +2,7 @@ interface FilteredNotesProps {
   params: Promise<{ slug: string[] }>;
 }
 
-import NotesClient from '@/components/NotesClient/Notes.client';
+import NotesClient from '@/app/notes/filter/[...slug]/Notes.client';
 import QUERY_KEYS from '@/const/queryKeys';
 import { fetchNotes } from '@/lib/api';
 import {
