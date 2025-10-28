@@ -68,3 +68,8 @@
   position: absolute;
   right: 20px;
 }
+
+.modal {
+  position: relative;
+  min-height: 300px;
+}

@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
+import clsx from 'clsx';
 
 interface ModalProps {
   children: React.ReactNode;
   handleClose: () => void;
+  className?: string;
 }
 
-function Modal({ children, handleClose }: ModalProps) {
+function Modal({ children, handleClose, className = '' }: ModalProps) {
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       handleClose();
@@ -37,7 +39,7 @@ function Modal({ children, handleClose }: ModalProps) {
       role="dialog"
       aria-modal="true"
     >
-      <div className={css.modal}>{children}</div>
+      <div className={clsx(css.modal, className)}>{children}</div>
     </div>,
     document.body
   );
